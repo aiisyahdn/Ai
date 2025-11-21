@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Keren</title>
+    <!-- Berfungsi untuk menghubungkan proyek dengan Tailwind CSS, font Inter dari google fonts, Javascript dan Style CSS Eksternal -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-blue': '#ADB8C7', // Latar belakang
+                        'calc-body': '#EFE2DC', // Badan kalkulator
+                        'calc-display': '#919985', // Layar
+                        'btn-red': '#DD6B55', // Tombol CE/C (Merah Bata)
+                        'btn-normal': '#FFFFFF', // Tombol Angka/Operator (Putih)
+                        'btn-soft-brown': '#A0897C', // Operator dan Fungsi Lain (Cokelat Muda Soft)
+                        'btn-hover': '#F0F0F0', // Hover untuk tombol putih
+                        'dark-brown': '#7E5B5B', // Aksen (Jika diperlukan)
+                    },
+                    borderRadius: {
+                        'xl': '1.25rem', // Membuat sudut lebih membulat
+                        '2xl': '1rem',
+                    },
+                }
+            }
+        }
+    </script>
+    <script src="Javascript.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-soft-blue text-gray-800 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-sm bg-calc-body rounded-2xl shadow-xl p-6 space-y-4">
+        <div> 
+            <h2 style="font-family:verdana; color: #555;">NAMA : Aisyah Dini Khairani</h2>
+            <h2 style="font-family:verdana; color: #555;">NIM : 1710624061</h2>
+        </div>
+        <!-- Bagian ini menampilkan gambar status kalkulator. Gambar akan berubah sesuai kondisi: normal, sukses, atau error saat pengguna melakukan perhitungan. -->
+        <div>
+            <img id="statusImage" 
+                 src="https://placehold.co/400x100/374151/E5E7EB?text=Kalkulator" 
+                 alt="Status Kalkulator"
+                 class="w-full rounded-lg transition-all duration-300 ease-in-out shadow-inner">
+        </div>
+
+        <!-- Bagian ini merupakan layar kalkulator (display) tempat angka dan hasil perhitungan ditampilkan. Input dibuat hanya bisa dibaca (readonly) supaya user hanya dapat mengetik lewat tombol. -->
+        <div class="bg-calc-display  rounded-lg p-4 shadow-inner">
+            <input type="text" id="display" 
+                   class="w-full bg-transparent text-right text-5xl font-mono text-white border-0 outline-none p-2" 
+                   readonly 
+                   placeholder="0">
+        </div>
+
+        <!-- Koding untuk membuat tata letak tombol kalkulator dalam bentuk grid yang berisi 4 kolom dengan jarak antar tombol. -->
+        <div class="grid grid-cols-4 gap-3">
+            <!-- Tombol kalkulator simbol C, DEL, %, dan /. data-value menyimpan nilai dari tombol yang nantinya akan digunakan di JavaScript ketika tombol ditekan. -->
+            <button data-value="C" class="btn-calc text-2xl font-bold bg-red-600 hover:bg-red-500 rounded-lg p-5 shadow-md text-white">C</button>
+            <button data-value="DEL" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">DEL</button>
+            <button data-value="%" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">%</button>
+            <button data-value="/" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">/</button>
+
+            <!--  Tombol kalkulator angka 7, 8, 9, dan simbol *. data-value menyimpan nilai dari tombol yang nantinya akan digunakan di JavaScript ketika tombol ditekan.  -->
+            <button data-value="7" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">7</button>
+            <button data-value="8" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">8</button>
+            <button data-value="9" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">9</button>
+            <button data-value="*" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">*</button>
+
+            <!--  Tombol kalkulator angka 4, 5, 6, dan simbol -. data-value menyimpan nilai dari tombol yang nantinya akan digunakan di JavaScript ketika tombol ditekan.  -->
+            <button data-value="4" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">4</button>
+            <button data-value="5" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">5</button>
+            <button data-value="6" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">6</button>
+            <button data-value="-" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">-</button>
+
+            <!--  Tombol kalkulator angka 1, 2, 3, dan simbol +. data-value menyimpan nilai dari tombol yang nantinya akan digunakan di JavaScript ketika tombol ditekan.  -->
+            <button data-value="1" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">1</button>
+            <button data-value="2" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">2</button>
+            <button data-value="3" class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">3</button>
+            <button data-value="+" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">+</button>
+
+            <!--  Tombol kalkulator angka 0, dan simbol =, serta titik . data-value menyimpan nilai dari tombol yang nantinya akan digunakan di JavaScript ketika tombol ditekan.  -->
+            <button data-value="0" class="btn-calc col-span-2 text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">0</button>
+            <button data-value="." class="btn-calc text-2xl font-bold bg-btn-normal hover:bg-btn-hover rounded-lg p-5 shadow-md">.</button>
+            <button data-value="=" class="btn-calc text-2xl font-bold bg-btn-soft-brown hover:bg-btn-hover rounded-lg p-5 shadow-md text-white">=</button>
+        </div>
+
+    </div>
+</body>
+</html>
