@@ -1,0 +1,25 @@
+/* Menggunakan font Inter */
+body {
+    font-family: 'Inter', sans-serif;
+}
+/* Efek klik tombol yang lebih baik */
+.btn-calc {
+    transition: all 0.1s ease-in-out;
+}
+.btn-calc:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.bg-pink-800{
+    background-color: rgb(255, 170, 230) !important;
+}
+.btn-calc {
+    border: 1px solid #ccc; /* Tambahkan border tipis untuk memisahkan tombol putih */
+    color: #4A4A4A; /* Ganti warna teks tombol menjadi gelap */
+}
+.btn-calc:hover {
+    opacity: 0.9;
+}
+.btn-calc:active {
+    transform: translateY(4px); /* Geser ke bawah 4px */
+}
